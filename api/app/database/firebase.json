@@ -1,13 +1,3 @@
 {
-    "type": "service_account",
-    "project_id": "energyvibes-99009",
-    "private_key_id": "f82aa234766d8740e66f9421e2f8d113769ac06a",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBG5CxfiaEQohM\nNKa0YthdZuJ67tJQGd/ULQ4O69O25ufg9GtXGkOe5gp/tw5aj8bziE6ZqnTAET6z\nxm6tBqm4Ss9Xa/PyWOkNNxFBEBIQDg0qu0SwY1Hcemwhor7MVorzV00oOdJwSrmH\nD7z95ySjxymAYoSph/hQXF659qaAeiNBbVJ6Wwt99+7XdPiI88pn32yI3fu8WOs9\nAh7AUNFwrb6kcqWhlHGovTDYrrp8P9PNm0rxQ9HwuGzZgbzLmq9K5E/fRs/oo7jh\nQBDLAY9yOIzFBooIDngSHLW1WnS/Xtoa2ZN3tGzvLhEC/rSTMNBB+YA2b0kCkcgF\niGz/q5NxAgMBAAECggEAEVL/QqUuIGx1nNyWXhWGEq8Rv3SggpYnqfnWyojmqACE\nKf7TiG9vRJiftYB/NamzcBK49nk/2yFQ7kDtmfFAlauEeXPSYVoPomNf1WXzMOSJ\n0t0VFvv6Ep0bCVN36Y4UDiu1XNf/JJrXlSHY0zCC7XyHISD1hN4RbWg0CVvy6RCk\nGKSDmFB/OgDoW7BSlAkF/LdeRQHNMEFPPpkmBPNiExY6ayLiR9B91Qp18Jnxn2WR\nAC0+Hn/4RPzFOOXXOE4KHg1Vth+QEJctdO7z6Dd/mVOWNCAiYpLJFiBcWJbODxC4\nZCYk0wG2OGgvzG3UbTFMKtcT3kwo6T8pEuJx8Nog4QKBgQDqghZeWXd2PCSsHN3U\nK4atNphrgEoftQOp5xYC6QCopIC8CBaF11ipUxEnJAvn3QtfQl4jN6967eIS3EO+\n0WI5nLCbNxaUkVwXDDaZHZOc7TLif7DbYw05ENUzz0O1EeOF3gSRW6Sj2XIglm86\n1eHU67rXvrgBS9oDAKy7zijWmQKBgQDSzikdwuE1UHL/TR7C0TgqxFJvJ4g/TMf8\nb5Ka2J+kf8qg+ckyw+iA+CebwvdTiEWztiNYHD1gZWQRmER/EgxKZYivvRkU3Z2J\nZplQAQ3nVlDyR1Kn19TqD2OSJE1zo4U8jpQ4YIdLxLVKSbNAOH+Ua+VTC5+3HiWL\naYCtU7simQKBgQDQTCRaQdWeq+VXC3zuTIsfp/LS6eztJPfQHnaqtxPit9uxKO34\njEMwg5wkzBvXI7xKLMU5Oukfo9S/M+7ou0soKUmlVNU1ube2sR59+ot3RCmCjjEl\nbWH9Yjo9/sgBOZaC/aXJB0HCWA7La1P5SqmBWrFnmPwQCrPnHt5PItubYQKBgQDG\neeSsaLexgrVDOlEkC+heG8mhbg8RyjDgtAvMTvi/4LHfLk8IxPs7smlYdhB3TW6S\n7YIJi00eXVgCWOLk4RFBWqd/DwN2adHRdBAVC2kTzmkYM57W+Jc2aJbPGe7yWZsw\nkO1sxzWbWPF3qDxk0s0L6SpZLjCKMJAY2pSUnKkswQKBgFAMPHLg6qj8DK4u9i95\ncm0itY2jZ1vpCiD9Pa8pE8rbZJ6ifmBVkv6b6pjYjg/4EbTPqstGUTcwz/Sagj3L\nOx9X5LX1C56siT/82ZkMP4iAfhM4BeK6LlGePhX57Uvcgny9G+tpgISVtQh2qypi\n6KTdEo76NnYCB5wb9cuq5hPG\n-----END PRIVATE KEY-----\n",
-    "client_email": "firebase-adminsdk-5nzcd@energyvibes-99009.iam.gserviceaccount.com",
-    "client_id": "105488776242307033252",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-5nzcd%40energyvibes-99009.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"
+
   }
