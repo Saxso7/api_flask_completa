@@ -2,7 +2,7 @@ from flask import request
 from flask_restx import  Resource
 from flask_cors import cross_origin, CORS
 from api import app
-from app.database.database import db, verify_firebase_token, user_Ref, get_next_id
+from app.database.database import db, verify_firebase_token, user_Ref, get_next_id, check_admin_role
 from app.models.models import userAPI, user_model, api
 
 #Asignamos el valor Blueprint y API desde models.py
@@ -26,13 +26,15 @@ class CreateUser(Resource):
             try:
                 new_id = get_next_id()
                 age = request.json['age']
+                role = 'usuario'
                 
                 user_Ref.document(new_id).set({
                     'id': new_id,
                     'name': request.json['name'],
                     'age': age,
                     'email': request.json['email'],
-                    'password': request.json['password']
+                    'password': request.json['password'],
+                    'role': role
                 })
 
                 return {'success': True, 'message': 'Usuario creado con éxito'}, 201
@@ -45,17 +47,47 @@ class CreateUser(Resource):
 @cross_origin
 @api.route('/get', methods=['GET'])
 class GetUser(Resource):
+    @check_admin_role
     def get(self):
         # Verifica la autenticación con Firebase
-        authenticated, uid = verify_firebase_token()
-        
+        authenticated = verify_firebase_token()
+
         if authenticated:
-            # Si está autenticado, puedes acceder a 'uid' para obtener el ID único del usuario
-            current_user = uid
-            users = [user.to_dict() for user in user_Ref.stream()]
-            return {"user": current_user, "users": users}, 200
+            # Obtiene todos los documentos de la colección "users" en Firestore
+            user_collection = user_Ref.stream()
+        
+            # Crea una lista para almacenar los datos de todos los usuarios
+            users_data = []
+        
+            for user_doc in user_collection:
+                user_data = user_doc.to_dict()
+                users_data.append(user_data)
+        
+            return {"users": users_data}, 200
         else:
-            return {'message': 'Autenticación fallida'}, 401
+            return {'error': 'No estás autenticado en Firebase'}, 401
+        
+'''# Ruta para obtener todos los usuarios
+@cross_origin
+@api.route('/get', methods=['GET'])
+class GetUser(Resource):
+
+    def get(self):
+        try:
+
+   
+            user_collection = user_Ref.stream()
+            
+            # Crea una lista para almacenar los datos de todos los usuarios
+            users_data = []
+        
+            for user_doc in user_collection:
+                    user_data = user_doc.to_dict()
+                    print(user_data)
+                    users_data.append(user_data)
+                    return users_data
+        except Exception as e:
+            return {'error': str(e)}, 500'''
 
 # Ruta para obtener un usuario por ID
 @api.route('/get/<user_id>')

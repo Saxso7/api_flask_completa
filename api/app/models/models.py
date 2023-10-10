@@ -11,5 +11,6 @@ user_model = api.model('User', {
     'name': fields.String(description='Nombre del usuario'),
     'age': fields.String(description='Edad del usuario'),
     'email': fields.String(description='Email del usuario'),
-    'password': fields.String(description='Contraseña del usuario')
+    'password': fields.String(description='Contraseña del usuario'),
+    'role': fields.String(descrption='Rol del usuario')
 })
