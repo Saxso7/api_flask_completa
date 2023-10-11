@@ -1,8 +1,8 @@
 from flask import request
 from flask_restx import  Resource
 from flask_cors import cross_origin, CORS
-from api import app
-from app.database.database import db, verify_firebase_token, user_Ref, get_next_id, check_admin_role
+from app import app
+from app.database.database import verify_firebase_token, user_Ref, get_next_id, check_admin_role
 from app.models.models import userAPI, user_model, api
 
 #Asignamos el valor Blueprint y API desde models.py

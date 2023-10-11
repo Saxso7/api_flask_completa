@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = '123456qwerty'
 
 
 # Carga las credenciales de Firebase desde un archivo JSON
-cred = credentials.Certificate("api/app/database/firebase.json")
+cred = credentials.Certificate("app/database/firebase.json")
 
 # Inicializa la aplicación Firebase con las credenciales
 default_app = initialize_app(cred)
