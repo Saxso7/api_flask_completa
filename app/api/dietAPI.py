@@ -2,7 +2,7 @@ from flask import request
 from flask_restx import Resource
 from flask_cors import cross_origin, CORS
 from app import app
-from app.database.database import diet_Ref, get_next_id_diet
+from app.database.database import diet_Ref, get_next_id_diet, verify_firebase_token
 from app.models.models import dietAPI, diet_api, diet_model
 
 # Crear una instancia de dietAPI y api para las rutas de dieta
@@ -57,6 +57,57 @@ class CreateDiet(Resource):
                 })
 
                 return {'success': True, 'message': 'Dieta registrada'}, 201
+            except Exception as e:
+                return {'error': f'Ha ocurrido un error: {str(e)}'}, 500
+        else:
+            return {'error': 'Content-Type debe ser application/json'}, 415
+
+# Ruta para eliminar un Dieta por ID
+@api.route('/diet/delete/<diet_id>')
+class DeleteDiet(Resource):
+    def delete(self, diet_id):
+        # Verifica la autenticación con Firebase
+        authenticated, _ = verify_firebase_token()
+        
+        if not authenticated:
+            return {'error': 'No estás autenticado en Firebase'}, 401
+
+        diet_doc = diet_Ref.document(diet_id).get()
+        if diet_doc.exists:
+            diet_Ref.document(diet_id).delete()
+            return {'success': True, 'message': 'Dieta eliminado con éxito'}, 200
+        else:
+            return {'error': 'Dieta no encontrado'}, 404
+        
+# Ruta para actualizar un Dieta por ID
+@api.route('/user/put/<diet_id>')
+class UpdateUser(Resource):
+    @api.expect(diet_model, validate=True)
+    def put(self, diet_id):
+        # Verifica la autenticación con Firebase
+        authenticated, _ = verify_firebase_token()
+        
+        if not authenticated:
+            return {'error': 'No estás autenticado en Firebase'}, 401
+
+        if request.headers['Content-Type'] == 'application/json':
+            try:
+                user_doc = diet_Ref.document(diet_id).get()
+                if user_doc.exists:
+                    tipo = request.json['tipo']
+                    contenido = request.json['contenido']
+                    
+                    diet_data = {
+                        'tipo': tipo,
+                        'contenido': contenido,
+                        'periodo': request.json['periodo']
+                    }
+
+                    diet_Ref.document(diet_id).update(diet_data)
+
+                    return {'success': True, 'message': 'Dieta actualizado con éxito'}, 200
+                else:
+                    return {'error': 'Dieta no encontrado'}, 404
             except Exception as e:
                 return {'error': f'Ha ocurrido un error: {str(e)}'}, 500
         else:
