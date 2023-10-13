@@ -2,12 +2,12 @@ from flask import request
 from flask_restx import  Resource
 from flask_cors import cross_origin, CORS
 from app import app
-from app.database.database import verify_firebase_token, user_Ref, get_next_id, check_admin_role
-from app.models.models import userAPI, user_model, api
+from app.database.database import verify_firebase_token, user_Ref, get_next_id_user, check_admin_role
+from app.models.models import userAPI, user_model, user_api
 
 #Asignamos el valor Blueprint y API desde models.py
 userAPI = userAPI
-api = api
+api = user_api
 
 #Asignamos el modelo de usuario
 user_model = user_model
@@ -17,14 +17,14 @@ CORS = (app)
 
 # Ruta para crear un nuevo usuario
 @cross_origin
-@api.route('/post')
+@api.route('/user/post')
 class CreateUser(Resource):
     @api.expect(user_model, validate=True)
     def post(self):
         """Crea un nuevo usuario"""
         if request.headers['Content-Type'] == 'application/json':
             try:
-                new_id = get_next_id()
+                new_id = get_next_id_user()
                 age = request.json['age']
                 role = 'usuario'
                 
@@ -45,7 +45,7 @@ class CreateUser(Resource):
 
 # Ruta para obtener todos los usuarios
 @cross_origin
-@api.route('/get', methods=['GET'])
+@api.route('/user/get', methods=['GET'])
 class GetUser(Resource):
     @check_admin_role
     def get(self):
@@ -67,30 +67,9 @@ class GetUser(Resource):
         else:
             return {'error': 'No estás autenticado en Firebase'}, 401
         
-'''# Ruta para obtener todos los usuarios
-@cross_origin
-@api.route('/get', methods=['GET'])
-class GetUser(Resource):
-
-    def get(self):
-        try:
-
-   
-            user_collection = user_Ref.stream()
-            
-            # Crea una lista para almacenar los datos de todos los usuarios
-            users_data = []
-        
-            for user_doc in user_collection:
-                    user_data = user_doc.to_dict()
-                    print(user_data)
-                    users_data.append(user_data)
-                    return users_data
-        except Exception as e:
-            return {'error': str(e)}, 500'''
 
 # Ruta para obtener un usuario por ID
-@api.route('/get/<user_id>')
+@api.route('/user/get/<user_id>')
 class GetSingleUser(Resource):
     def get(self, user_id):
         # Verifica la autenticación con Firebase
@@ -107,7 +86,7 @@ class GetSingleUser(Resource):
             return {'error': 'Usuario no encontrado'}, 404
 
 # Ruta para eliminar un usuario por ID
-@api.route('/delete/<user_id>')
+@api.route('/user/delete/<user_id>')
 class DeleteUser(Resource):
     def delete(self, user_id):
         # Verifica la autenticación con Firebase
@@ -124,7 +103,7 @@ class DeleteUser(Resource):
             return {'error': 'Usuario no encontrado'}, 404
 
 # Ruta para actualizar un usuario por ID
-@api.route('/put/<user_id>')
+@api.route('/user/put/<user_id>')
 class UpdateUser(Resource):
     @api.expect(user_model, validate=True)
     def put(self, user_id):

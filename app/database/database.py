@@ -5,9 +5,10 @@ from firebase_admin import firestore, auth  # Importa auth desde firebase_admin
 # Conexión a Firestore
 db = firestore.client()
 user_Ref = db.collection('usuarios')
+diet_Ref = db.collection('dietas')
 
 # Función para obtener el próximo ID autoincremental
-def get_next_id():
+def get_next_id_user():
     new_id = 1
     
     while True:
@@ -15,6 +16,19 @@ def get_next_id():
         user_doc = user_doc_ref.get()
         
         if not user_doc.exists:
+            return str(new_id)
+        
+        new_id += 1
+
+# Función para obtener el próximo ID autoincremental
+def get_next_id_diet():
+    new_id = 1
+    
+    while True:
+        diet_doc_ref = db.collection('dietas').document(str(new_id))
+        diet_doc = diet_doc_ref.get()
+        
+        if not diet_doc.exists:
             return str(new_id)
         
         new_id += 1
