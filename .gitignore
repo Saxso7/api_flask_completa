@@ -1,4 +1,4 @@
-app/database/firebase.json
+#app/database/firebase.json
 
 # Excluir el directorio .vscode
 .vscode/
