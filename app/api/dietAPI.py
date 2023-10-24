@@ -14,7 +14,7 @@ diet_model = diet_model
 
 # Ruta para obtener datos de dieta (GET)
 @cross_origin
-@api.route('/diet/get', methods=['GET'])
+@api.route('/get', methods=['GET'])
 class GetDiet(Resource):
 
     def get(self):
@@ -38,7 +38,7 @@ class GetDiet(Resource):
 
 # Ruta para registrar una nueva dieta (POST)
 @cross_origin
-@api.route('/diet/post')
+@api.route('/post')
 class CreateDiet(Resource):
     @api.expect(diet_model, validate=True)
     def post(self):
@@ -63,7 +63,7 @@ class CreateDiet(Resource):
             return {'error': 'Content-Type debe ser application/json'}, 415
 
 # Ruta para eliminar un Dieta por ID
-@api.route('/diet/delete/<diet_id>')
+@api.route('/delete/<diet_id>')
 class DeleteDiet(Resource):
     def delete(self, diet_id):
         # Verifica la autenticación con Firebase
@@ -80,7 +80,7 @@ class DeleteDiet(Resource):
             return {'error': 'Dieta no encontrado'}, 404
         
 # Ruta para actualizar un Dieta por ID
-@api.route('/user/put/<diet_id>')
+@api.route('/put/<diet_id>')
 class UpdateUser(Resource):
     @api.expect(diet_model, validate=True)
     def put(self, diet_id):

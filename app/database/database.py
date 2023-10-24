@@ -6,6 +6,7 @@ from firebase_admin import firestore, auth  # Importa auth desde firebase_admin
 db = firestore.client()
 user_Ref = db.collection('usuarios')
 diet_Ref = db.collection('dietas')
+gym_Ref = db.collection('gimnasios')
 
 # Función para obtener el próximo ID autoincremental
 def get_next_id_user():
@@ -26,6 +27,19 @@ def get_next_id_diet():
     
     while True:
         diet_doc_ref = db.collection('dietas').document(str(new_id))
+        diet_doc = diet_doc_ref.get()
+        
+        if not diet_doc.exists:
+            return str(new_id)
+        
+        new_id += 1
+
+# Función para obtener el próximo ID autoincremental
+def get_next_id_gym():
+    new_id = 1
+    
+    while True:
+        diet_doc_ref = db.collection('gimnasios').document(str(new_id))
         diet_doc = diet_doc_ref.get()
         
         if not diet_doc.exists:
@@ -80,3 +94,4 @@ def check_admin_role(func):
             return {'error': 'Error de autenticación'}, 401
 
     return decorated_function
+

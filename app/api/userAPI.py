@@ -17,7 +17,7 @@ CORS = (app)
 
 # Ruta para crear un nuevo usuario
 @cross_origin
-@api.route('/user/post')
+@api.route('/post')
 class CreateUser(Resource):
     @api.expect(user_model, validate=True)
     def post(self):
@@ -45,7 +45,7 @@ class CreateUser(Resource):
 
 # Ruta para obtener todos los usuarios
 @cross_origin
-@api.route('/user/get', methods=['GET'])
+@api.route('/get', methods=['GET'])
 class GetUser(Resource):
     @check_admin_role
     def get(self):
@@ -69,7 +69,7 @@ class GetUser(Resource):
         
 
 # Ruta para obtener un usuario por ID
-@api.route('/user/get/<user_id>')
+@api.route('/get/<user_id>')
 class GetSingleUser(Resource):
     def get(self, user_id):
         # Verifica la autenticación con Firebase
@@ -86,7 +86,7 @@ class GetSingleUser(Resource):
             return {'error': 'Usuario no encontrado'}, 404
 
 # Ruta para eliminar un usuario por ID
-@api.route('/user/delete/<user_id>')
+@api.route('/delete/<user_id>')
 class DeleteUser(Resource):
     def delete(self, user_id):
         # Verifica la autenticación con Firebase
@@ -103,7 +103,7 @@ class DeleteUser(Resource):
             return {'error': 'Usuario no encontrado'}, 404
 
 # Ruta para actualizar un usuario por ID
-@api.route('/user/put/<user_id>')
+@api.route('/put/<user_id>')
 class UpdateUser(Resource):
     @api.expect(user_model, validate=True)
     def put(self, user_id):

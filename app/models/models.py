@@ -26,3 +26,18 @@ diet_model = diet_api.model('Diet', {
     'contenido': fields.String(description='Contenido de la dieta'),
     'periodo': fields.String(description='Tiempo de duracion de la dieta')
 })
+
+# Creación de Blueprint y API para el sector de dieta
+gymAPI = Blueprint('gymAPI', __name__)
+gym_api = Api(gymAPI, doc='/swagger', title='API Energy Vibes (gimnasio)', description='API Energy Vibes (gimnasio)', default='API Energy Vibes (gimnasio)')
+
+# Definicion del modelo de dietas para el sector de dieta
+gym_model = gym_api.model('Gym', {
+    'id': fields.String(description='ID de las gimnasio'),
+    'nombre': fields.String(description='Nombre del gimnacio'),
+    'latitud': fields.Float(description='latitud del gimnasio'),
+    'longitud': fields.Float(description='longitud del gimnasio'),
+    'direccion': fields.String(description='direccion del gimnasio'),
+    'horario': fields.String(description='horario del gimnasio'),
+
+})
