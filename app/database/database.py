@@ -8,6 +8,8 @@ user_Ref = db.collection('usuarios')
 dietRes_Ref = db.collection('dietasResistencia')
 gym_Ref = db.collection('gimnasios')
 dietCard_Ref = db.collection('dietasCardio')
+dietHigh_Ref = db.collection('DietaEntrenamientoFuerte')
+dietWeight_Ref = db.collection('dietaPerdidaPeso')
 
 # Función para obtener el próximo ID autoincremental
 def get_next_id_user():
@@ -41,6 +43,32 @@ def get_next_id_dietRes():
     
     while True:
         diet_doc_ref = db.collection('dietasResistencia').document(str(new_id))
+        diet_doc = diet_doc_ref.get()
+        
+        if not diet_doc.exists:
+            return str(new_id)
+        
+        new_id += 1
+
+# Función para obtener el próximo ID autoincremental
+def get_next_id_dietHigh():
+    new_id = 1
+    
+    while True:
+        diet_doc_ref = db.collection('DietaEntrenamientoFuerte').document(str(new_id))
+        diet_doc = diet_doc_ref.get()
+        
+        if not diet_doc.exists:
+            return str(new_id)
+        
+        new_id += 1
+
+# Función para obtener el próximo ID autoincremental
+def get_next_id_dietWeight():
+    new_id = 1
+    
+    while True:
+        diet_doc_ref = db.collection('DietaEntrenamientoFuerte').document(str(new_id))
         diet_doc = diet_doc_ref.get()
         
         if not diet_doc.exists:

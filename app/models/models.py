@@ -28,7 +28,7 @@ dietRes_model = dietRes_api.model('DietRes', {
     'descripcionDesayuno': fields.String(description='Como esta compuesto el desayuno'),
     'almuerzo': fields.String(),
     'nombreAlmuerzo': fields.String(description='Nombre de la comida'),
-    'descripcionalmuerzo': fields.String(description='Como esta compuesto la comida'),
+    'descripcionAlmuerzo': fields.String(description='Como esta compuesto la comida'),
     'meriendaTarde': fields.String(),
     'nombreMeriendaTarde': fields.String(description='Nombre de la merienda'),
     'descripcionMeriendatarde': fields.String(description='Como esta compuesto la merienda'),
@@ -54,7 +54,57 @@ dietCard_model = dietCard_api.model('DietCard', {
     'descripcionDesayuno': fields.String(description='Como esta compuesto el desayuno'),
     'almuerzo': fields.String(),
     'nombreAlmuerzo': fields.String(description='Nombre de la comida'),
-    'descripcionalmuerzo': fields.String(description='Como esta compuesto la comida'),
+    'descripcionAlmuerzo': fields.String(description='Como esta compuesto la comida'),
+    'meriendaTarde': fields.String(),
+    'nombreMeriendaTarde': fields.String(description='Nombre de la merienda'),
+    'descripcionMeriendatarde': fields.String(description='Como esta compuesto la merienda'),
+    'cena': fields.String(),
+    'nombreCena': fields.String(description='Nombre de la cena'),
+    'descripcionCena': fields.String(description='descripcion de la cena'),
+    'meriendaNocturna': fields.String(),
+    'nombreMeriendaNocturna': fields.String(description='Nombre de la merienda nocturna'),
+    'descripcionMeriendaNocturna': fields.String(description='Descripcion de la merienda nocturna'),
+
+})
+# Creación de Blueprint y API para el sector de dieta Entrenamiento Fuerte
+dietHighAPI = Blueprint('dietHigh', __name__)
+dietHigh_api = Api(dietHighAPI, doc='/swagger', title='API Energy Vibes (Dieta Entrenamiento Fuerte)', description='API Energy Vibes (Dieta Entrenamiento Fuerte)', default='API Energy Vibes (Dieta Entrenamiento Fuerte)')
+
+# Definicion del modelo de dietas para el sector de dieta Entrenamiento Fuerte
+dietHigh_model = dietHigh_api.model('DietCard', {
+    'id': fields.String(description='ID de las dietas'),
+    'state': fields.String(description='Opcion de esta dieta'),
+    'desayuno': fields.String(),
+    'nombreDesayuno': fields.String(description= 'Batido y frutas'),
+    'descripcionDesayuno': fields.String(description='Como esta compuesto el desayuno'),
+    'almuerzo': fields.String(),
+    'nombreAlmuerzo': fields.String(description='Nombre de la comida'),
+    'descripcionAlmuerzo': fields.String(description='Como esta compuesto la comida'),
+    'meriendaTarde': fields.String(),
+    'nombreMeriendaTarde': fields.String(description='Nombre de la merienda'),
+    'descripcionMeriendatarde': fields.String(description='Como esta compuesto la merienda'),
+    'cena': fields.String(),
+    'nombreCena': fields.String(description='Nombre de la cena'),
+    'descripcionCena': fields.String(description='descripcion de la cena'),
+    'meriendaNocturna': fields.String(),
+    'nombreMeriendaNocturna': fields.String(description='Nombre de la merienda nocturna'),
+    'descripcionMeriendaNocturna': fields.String(description='Descripcion de la merienda nocturna'),
+
+})
+# Creación de Blueprint y API para el sector de dieta Entrenamiento Fuerte
+dietWeightAPI = Blueprint('dietWeight', __name__)
+dietWeight_api = Api(dietWeightAPI, doc='/swagger', title='API Energy Vibes (Dieta Perdida de peso)', description='API Energy Vibes (Dieta Perdida de peso)', default='API Energy Vibes (Dieta Perdida de peso)')
+
+# Definicion del modelo de dietas para el sector de dieta Entrenamiento Fuerte
+dietWeight_model = dietWeight_api.model('DietCard', {
+    'id': fields.String(description='ID de las dietas'),
+    'state': fields.String(description='Opcion de esta dieta'),
+    'desayuno': fields.String(),
+    'nombreDesayuno': fields.String(description= 'Batido y frutas'),
+    'descripcionDesayuno': fields.String(description='Como esta compuesto el desayuno'),
+    'almuerzo': fields.String(),
+    'nombreAlmuerzo': fields.String(description='Nombre de la comida'),
+    'descripcionAlmuerzo': fields.String(description='Como esta compuesto la comida'),
     'meriendaTarde': fields.String(),
     'nombreMeriendaTarde': fields.String(description='Nombre de la merienda'),
     'descripcionMeriendatarde': fields.String(description='Como esta compuesto la merienda'),
