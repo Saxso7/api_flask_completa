@@ -2,15 +2,15 @@ from flask import request
 from flask_restx import Resource
 from flask_cors import cross_origin, CORS
 from app import app
-from app.database.database import dietRes_Ref, get_next_id_dietRes, verify_firebase_token
-from app.models.models import dietResAPI, dietRes_api, dietRes_model
+from app.database.database import dietCard_Ref, get_next_id_dietCard, verify_firebase_token
+from app.models.models import dietCardApi, dietCard_api, dietCard_model
 
-# Crear una instancia de dietResAPI y api para las rutas de dieta Resistencia
-dietResAPI = dietResAPI
-api = dietRes_api
+# Crear una instancia de dietCardApi y api para las rutas de dieta Resistencia
+dietCardApi = dietCardApi
+api = dietCard_api
 
 # Definir el modelo de dieta Resistencia
-dietRes_model = dietRes_model
+diedietCard_model = dietCard_model
 
 # Ruta para obtener datos de dieta Resistencia (GET)
 @cross_origin
@@ -21,7 +21,7 @@ class GetDietRes(Resource):
         """Obtener datos de dieta Resistencia"""
         try:
             # Obtener la colección de dieta Resistencias desde la base de datos
-            diet_collection = dietRes_Ref.stream()
+            diet_collection = dietCard_Ref.stream()
 
             # Crear una lista para almacenar los datos de todas las dietas
             diets_data = []
@@ -40,16 +40,16 @@ class GetDietRes(Resource):
 @cross_origin
 @api.route('/post')
 class CreateDietRes(Resource):
-    @api.expect(dietRes_model, validate=True)
+    @api.expect(diedietCard_model, validate=True)
     def post(self):
         """Registrar una nueva dieta"""
         if request.headers['Content-Type'] == 'application/json':
             try:
                 # Obtener un nuevo ID para la dieta
-                new_id = get_next_id_dietRes()
+                new_id = get_next_id_dietCard()
 
                 # Almacenar los datos de la nueva dieta en la base de datos
-                dietRes_Ref.document(new_id).set({
+                dietCard_Ref.document(new_id).set({
                     'id': new_id,
                     'descripcionDesayuno': request.json['descripcionDesayuno'],
                     'desayuno': request.json['desayuno'],
@@ -86,9 +86,9 @@ class DeleteDietRes(Resource):
         if not authenticated:
             return {'error': 'No estás autenticado en Firebase'}, 401
 
-        diet_doc = dietRes_Ref.document(diet_id).get()
+        diet_doc = dietCard_Ref.document(diet_id).get()
         if diet_doc.exists:
-            dietRes_Ref.document(diet_id).delete()
+            dietCard_Ref.document(diet_id).delete()
             return {'success': True, 'message': 'Dieta eliminado con éxito'}, 200
         else:
             return {'error': 'Dieta no encontrado'}, 404
@@ -96,7 +96,7 @@ class DeleteDietRes(Resource):
 # Ruta para actualizar un Dieta por ID
 @api.route('/put/<diet_id>')
 class UpdateDietRes(Resource):
-    @api.expect(dietRes_model, validate=True)
+    @api.expect(diedietCard_model, validate=True)
     def put(self, diet_id):
         # Verifica la autenticación con Firebase
         authenticated, _ = verify_firebase_token()
@@ -106,7 +106,7 @@ class UpdateDietRes(Resource):
 
         if request.headers['Content-Type'] == 'application/json':
             try:
-                user_doc = dietRes_Ref.document(diet_id).get()
+                user_doc = dietCard_Ref.document(diet_id).get()
                 if user_doc.exists:
                     descripcionDesayuno = request.json['descripcionDesayuno']
                     desayuno = request.json['desayuno']
@@ -128,7 +128,7 @@ class UpdateDietRes(Resource):
                         'nombreDesayuno': request.json['nombreDesayuno']
                     }
 
-                    dietRes_Ref.document(diet_id).update(diet_data)
+                    dietCard_Ref.document(diet_id).update(diet_data)
 
                     return {'success': True, 'message': 'dieta Resistencia actualizado con éxito'}, 200
                 else:

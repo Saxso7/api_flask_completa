@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, render_template, request, url_for
 from firebase_admin import credentials, initialize_app
 from flask_cors import CORS
 from firebase_admin import auth
@@ -20,6 +20,9 @@ cred = credentials.Certificate("app/database/firebase.json")
 # Inicializa la aplicación Firebase con las credenciales
 default_app = initialize_app(cred)
 
+@app.route('/')
+def index():
+    return render_template('API.html')
 
 
 # Define una función para crear la aplicación Flask
@@ -28,9 +31,12 @@ def create_app():
     from app.api.userAPI import userAPI
     from app.api.dietResAPI import dietResAPI
     from app.api.gymAPI import gymAPI
+    from app.api.dietCardAPI import dietCardApi
     app.register_blueprint(userAPI, url_prefix='/user')
     app.register_blueprint(dietResAPI, url_prefix='/dietRes')
     app.register_blueprint(gymAPI, url_prefix='/gym')
+    app.register_blueprint(dietCardApi, url_prefix='/dietCard')
+    
     
 
 
