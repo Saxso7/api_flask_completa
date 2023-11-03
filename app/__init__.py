@@ -26,10 +26,10 @@ default_app = initialize_app(cred)
 def create_app():    
     # Registra el Blueprint 'userAPI' en la aplicación Flask
     from app.api.userAPI import userAPI
-    from app.api.dietAPI import dietAPI
+    from app.api.dietResAPI import dietResAPI
     from app.api.gymAPI import gymAPI
     app.register_blueprint(userAPI, url_prefix='/user')
-    app.register_blueprint(dietAPI, url_prefix='/diet')
+    app.register_blueprint(dietResAPI, url_prefix='/dietRes')
     app.register_blueprint(gymAPI, url_prefix='/gym')
     
 

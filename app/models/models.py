@@ -16,15 +16,29 @@ user_model = user_api.model('User', {
 })
 
 # Creación de Blueprint y API para el sector de dieta
-dietAPI = Blueprint('dietAPI', __name__)
-diet_api = Api(dietAPI, doc='/swagger', title='API Energy Vibes (Dieta)', description='API Energy Vibes (Dieta)', default='API Energy Vibes (Dieta)')
+dietResAPI = Blueprint('dietResAPI', __name__)
+dietRes_api = Api(dietResAPI, doc='/swagger', title='API Energy Vibes (Dieta Resitencia)', description='API Energy Vibes (Dieta Resistencia)', default='API Energy Vibes (Dieta Resistencia)')
 
 # Definicion del modelo de dietas para el sector de dieta
-diet_model = diet_api.model('Diet', {
+dietRes_model = dietRes_api.model('DietRes', {
     'id': fields.String(description='ID de las dietas'),
-    'tipo': fields.String(description='Tipo de dieta'),
-    'contenido': fields.String(description='Contenido de la dieta'),
-    'periodo': fields.String(description='Tiempo de duracion de la dieta')
+    'state': fields.String(description='Opcion de esta dieta'),
+    'desayuno': fields.String(),
+    'nombreDesayuno': fields.String(description= 'Batido y frutas'),
+    'descripcionDesayuno': fields.String(description='Como esta compuesto el desayuno'),
+    'almuerzo': fields.String(),
+    'nombreAlmuerzo': fields.String(description='Nombre de la comida'),
+    'descripcionalmuerzo': fields.String(description='Como esta compuesto la comida'),
+    'meriendaTarde': fields.String(),
+    'nombreMeriendaTarde': fields.String(description='Nombre de la merienda'),
+    'descripcionMeriendatarde': fields.String(description='Como esta compuesto la merienda'),
+    'cena': fields.String(),
+    'nombreCena': fields.String(description='Nombre de la cena'),
+    'descripcionCena': fields.String(description='descripcion de la cena'),
+    'meriendaNocturna': fields.String(),
+    'nombreMeriendaNocturna': fields.String(description='Nombre de la merienda nocturna'),
+    'descripcionMeriendaNocturna': fields.String(description='Descripcion de la merienda nocturna'),
+
 })
 
 # Creación de Blueprint y API para el sector de dieta
