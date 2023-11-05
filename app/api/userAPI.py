@@ -47,7 +47,6 @@ class CreateUser(Resource):
 @cross_origin
 @api.route('/get', methods=['GET'])
 class GetUser(Resource):
-    @check_admin_role
     def get(self):
         # Verifica la autenticación con Firebase
         authenticated = verify_firebase_token()
