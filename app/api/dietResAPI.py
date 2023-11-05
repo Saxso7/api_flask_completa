@@ -16,25 +16,30 @@ dietRes_model = dietRes_model
 @cross_origin
 @api.route('/get', methods=['GET'])
 class GetDietRes(Resource):
-
     def get(self):
         """Obtener datos de dieta Resistencia"""
-        try:
-            # Obtener la colección de dieta Resistencias desde la base de datos
-            diet_collection = dietRes_Ref.stream()
+        # Verifica la autenticación con Firebase
+        authenticated = verify_firebase_token()
 
-            # Crear una lista para almacenar los datos de todas las dietas
-            diets_data = []
+        if authenticated:
+            try:
+                # Cambia la colección a dietRes_Ref para obtener dietas Resistencia desde la base de datos
+                diet_collection = dietRes_Ref.stream()
 
-            # Iterar a través de los documentos de dieta en la colección
-            for diet_doc in diet_collection:
-                diet_data = diet_doc.to_dict()
-                print(diet_data)
-                diets_data.append(diet_data)
+                # Crear una lista para almacenar los datos de todas las dietas Resistencia
+                diets_data = []
 
-            return diets_data  # Devolver los datos de las dietas como respuesta
-        except Exception as e:
-            return {'error': str(e)}, 500
+                # Iterar a través de los documentos de dieta en la colección
+                for diet_doc in diet_collection:
+                    diet_data = diet_doc.to_dict()
+                    diets_data.append(diet_data)
+
+                return {"diet_resistencias": diets_data}, 200  # Devolver los datos de las dietas Resistencia como respuesta
+            except Exception as e:
+                return {'error': str(e)}, 500
+        else:
+            return {'error': 'No estás autenticado en Firebase'}, 401
+
 
 # Ruta para registrar una nueva dieta (POST)
 @cross_origin

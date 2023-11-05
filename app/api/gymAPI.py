@@ -14,27 +14,32 @@ gym_model = gym_model
 
 # Ruta para obtener datos de gimnasio (GET)
 @cross_origin
-@api.route('/get', methods=['GET'])
+@api.route('/get', methods=['GET'])  # Cambia la ruta a '/get_gym'
 class GetGym(Resource):
-
     def get(self):
         """Obtener datos de gimnasio"""
-        try:
-            # Obtener la colección de gimnasios desde la base de datos
-            gym_collection = gym_Ref.stream()
+        # Verifica la autenticación con Firebase
+        authenticated = verify_firebase_token()
 
-            # Crear una lista para almacenar los datos de todas las gimnasios
-            gyms_data = []
+        if authenticated:
+            try:
+                # Obtener la colección de gimnasios desde la base de datos
+                gym_collection = gym_Ref.stream()
 
-            # Iterar a través de los documentos de gimnasio en la colección
-            for gym_doc in gym_collection:
-                gym_data = gym_doc.to_dict()
-                print(gym_data)
-                gyms_data.append(gym_data)
+                # Crear una lista para almacenar los datos de todas las gimnasios
+                gyms_data = []
 
-            return gyms_data  # Devolver los datos de las gimnasios como respuesta
-        except Exception as e:
-            return {'error': str(e)}, 500
+                # Iterar a través de los documentos de gimnasio en la colección
+                for gym_doc in gym_collection:
+                    gym_data = gym_doc.to_dict()
+                    gyms_data.append(gym_data)
+
+                return {"gyms": gyms_data}, 200  # Devolver los datos de los gimnasios como respuesta
+            except Exception as e:
+                return {'error': str(e)}, 500
+        else:
+            return {'error': 'No estás autenticado en Firebase'}, 401
+
 
 # Ruta para registrar una nuevo gimnasio (POST)
 @cross_origin
