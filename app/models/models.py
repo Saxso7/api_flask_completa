@@ -9,7 +9,9 @@ user_api = Api(userAPI, doc='/swagger', title='API Energy Vibes (Usuario)', desc
 user_model = user_api.model('User', {
     'id': fields.String(description='ID del usuario'),
     'name': fields.String(description='Nombre del usuario'),
+    'lastName': fields.String(description='Apellido del usuario'),
     'age': fields.String(description='Edad del usuario'),
+    'numContact': fields.String(description='Contacto del usuario'),
     'email': fields.String(description='Email del usuario'),
     'password': fields.String(description='Contraseña del usuario'),
     'role': fields.String(description='Rol del usuario')

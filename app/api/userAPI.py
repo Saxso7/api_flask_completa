@@ -31,7 +31,9 @@ class CreateUser(Resource):
                 user_Ref.document(new_id).set({
                     'id': new_id,
                     'name': request.json['name'],
+                    'lastName': request.json['lastName'],
                     'age': age,
+                    'numContact': request.json['numContact'],
                     'email': request.json['email'],
                     'password': request.json['password'],
                     'role': role
