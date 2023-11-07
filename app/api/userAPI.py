@@ -3,7 +3,7 @@ from flask_restx import  Resource
 from flask_cors import cross_origin, CORS
 from app import app
 from app.database.database import verify_firebase_token, user_Ref, get_next_id_user, check_admin_role
-from app.models.models import userAPI, user_model, user_api
+from app.models.models import userAPI, user_model, user_api, update_field_model
 
 #Asignamos el valor Blueprint y API desde models.py
 userAPI = userAPI
@@ -124,12 +124,51 @@ class UpdateUser(Resource):
                     user_data = {
                         'name': request.json['name'],
                         'age': age,
-                        'email': email
+                        'email': email,
+                        'lastName': request.json['lastName'],
+                        'numContact': request.json['numContact'],
+                        'email': request.json['email']
+
                     }
 
                     user_Ref.document(user_id).update(user_data)
 
                     return {'success': True, 'message': 'Usuario actualizado con éxito'}, 200
+                else:
+                    return {'error': 'Usuario no encontrado'}, 404
+            except Exception as e:
+                return {'error': f'Ha ocurrido un error: {str(e)}'}, 500
+        else:
+            return {'error': 'Content-Type debe ser application/json'}, 415
+        
+@api.route('/updateField/<user_id>')
+class UpdateUserField(Resource):
+    @api.expect(update_field_model, validate=True)
+    def put(self, user_id):
+        # Verifica la autenticación con Firebase
+        authenticated, _ = verify_firebase_token()
+
+        if not authenticated:
+            return {'error': 'No estás autenticado en Firebase'}, 401
+
+        if request.headers['Content-Type'] == 'application/json':
+            try:
+                user_doc = user_Ref.document(user_id).get()
+                if user_doc.exists:
+                    field_name = request.json.get('field_name')
+                    new_value = request.json.get('new_value')
+
+                    if field_name and new_value:
+                        # Verifica si el campo a actualizar es válido
+                        if field_name in ['name', 'age', 'email', 'lastName', 'numContact']:
+                            # Actualiza el campo específico
+                            user_Ref.document(user_id).update({field_name: new_value})
+
+                            return {'success': True, 'message': f'Campo {field_name} actualizado con éxito'}, 200
+                        else:
+                            return {'error': 'Campo no válido para actualizar'}, 400
+                    else:
+                        return {'error': 'Se requiere field_name y new_value en la solicitud'}, 400
                 else:
                     return {'error': 'Usuario no encontrado'}, 404
             except Exception as e:

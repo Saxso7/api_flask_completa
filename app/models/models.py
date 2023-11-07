@@ -17,6 +17,12 @@ user_model = user_api.model('User', {
     'role': fields.String(description='Rol del usuario')
 })
 
+# Definición del modelo para la actualización de campos específicos
+update_field_model = user_api.model('UpdateField', {
+    'field_name': fields.String(description='Nombre del campo a actualizar', required=True),
+    'new_value': fields.String(description='Nuevo valor para el campo', required=True),
+})
+
 # Creación de Blueprint y API para el sector de dieta de resistencia
 dietResAPI = Blueprint('dietResAPI', __name__)
 dietRes_api = Api(dietResAPI, doc='/swagger', title='API Energy Vibes (Dieta Resitencia)', description='API Energy Vibes (Dieta Resistencia)', default='API Energy Vibes (Dieta Resistencia)')
