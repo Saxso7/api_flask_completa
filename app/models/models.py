@@ -127,7 +127,7 @@ dietWeight_model = dietWeight_api.model('DietCard', {
 
 # Creación de Blueprint y API para el sector de gym
 gymAPI = Blueprint('gymAPI', __name__)
-gym_api = Api(gymAPI, doc='/swagger', title='API Energy Vibes (gimnasio)', description='API Energy Vibes (gimnasio)', default='API Energy Vibes (gimnasio)')
+gym_api = Api(gymAPI, doc='/', title='API Energy Vibes (gimnasio)', description='API Energy Vibes (gimnasio)', default='API Energy Vibes (gimnasio)')
 
 # Definicion del modelo de dietas para el sector de dieta
 gym_model = gym_api.model('Gym', {
@@ -138,4 +138,24 @@ gym_model = gym_api.model('Gym', {
     'direccion': fields.String(description='direccion del gimnasio'),
     'horario': fields.String(description='horario del gimnasio'),
 
+})
+
+ReservationAPI = Blueprint('Reservation', __name__)
+res_api = Api(ReservationAPI, doc='/', title='API Energy Vibes(reservas realizadas)', description='API Energy Vibes (reservas realizadas)')
+
+res_model = res_api.model('Reservation', {
+    'id': fields.String(description='ID de las reservas'),
+    'usuario': fields.String(description='usuario del gimnasio'),
+    'nombreGym': fields.String(description='Nombre del gimnasio'),
+    'direccion': fields.String(description='direccion del gimnasio'),
+    'horaAgendada': fields.String(description=' del gimnasio'),    
+    'fechaAgendada': fields.String(description=' del gimnasio'),
+})
+
+DataAvAPI = Blueprint('DataAvaible', __name__)
+dataA_api = Api(DataAvAPI, doc='/', title='API Energy Vibes(horas disponibles)', description='API Energy Vibes (horas disponibles)')
+
+dataA_model = dataA_api.model('DataAvaible', {
+    'fechasDisponibles': fields.Date(description='ID de las horas disponibles'),
+    'hora': fields.List(fields.String, description='hora disponible del gimnasio')
 })

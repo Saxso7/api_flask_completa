@@ -34,12 +34,16 @@ def create_app():
     from app.api.dietCardAPI import dietCardApi
     from app.api.dietHighAPI import dietHighAPI
     from app.api.dietWeight import dietWeightAPI
+    from app.api.dataAAPI import DataAvAPI
+    from app.api.reservaAPI import ReservationAPI
     app.register_blueprint(userAPI, url_prefix='/user')
     app.register_blueprint(dietResAPI, url_prefix='/dietRes')
     app.register_blueprint(gymAPI, url_prefix='/gym')
     app.register_blueprint(dietCardApi, url_prefix='/dietCard')
     app.register_blueprint(dietHighAPI, url_prefix='/dietHigh')
     app.register_blueprint(dietWeightAPI, url_prefix='/dietWeight')
+    app.register_blueprint(DataAvAPI, url_prefix='/dataAv')
+    app.register_blueprint(ReservationAPI, url_prefix='/res')
 
     
     
