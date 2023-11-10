@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,37 +8,65 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
     body {
-      background-color: #f5f5f5;
+      background: #b3e0ff url('/assets/image/checkin.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #000; /* Letras negras */
     }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #fff;
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       margin-top: 50px;
+      text-align: center; /* Alinea el texto al centro */
     }
+
     h1 {
       font-size: 2.5rem;
-      color: #007BFF;
+      color: #007BFF; /* Azul claro mate para el título */
     }
+
     p {
       font-size: 1.2rem;
       margin-top: 20px;
     }
+
     a {
-      color: #007BFF;
+      color: #000; /* Letras negras para los enlaces */
+    }
+
+    /* Estilos adicionales para el mensaje de bienvenida y el ícono */
+    .welcome-message {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #007BFF; /* Azul claro mate para el mensaje de bienvenida */
+    }
+
+    .custom-icon {
+      margin-bottom: 20px;
+    }
+
+    /* Personaliza el tamaño de la imagen según tus preferencias */
+    .custom-icon img {
+      width: 80px;
+      height: 80px;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1 class="mt-5">API Energy Vibes</h1>
-    <p class="mt-3">API Endpoint: <a href="https://api.seyka.online/user">https://api.seyka.online/user/swagger</a></p>
-    <p class="mt-3">Descripción: Coloca tu descripción aquí</p>
+    <div class="custom-icon">
+    </div>
+    <h1 class="mt-5">Bienvenido a ENERGY VIBES</h1>
+    <p class="welcome-message">Tu ingreso ha sido validado</p>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
+

@@ -20,9 +20,13 @@ cred = credentials.Certificate("app/database/firebase.json")
 # Inicializa la aplicación Firebase con las credenciales
 default_app = initialize_app(cred)
 
-@app.route('/')
+@app.route('/checkin')
 def index():
     return render_template('API.html')
+
+@app.route('/')
+def main():
+    return render_template('index.html')
 
 
 # Define una función para crear la aplicación Flask
